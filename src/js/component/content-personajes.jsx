@@ -41,6 +41,7 @@ export const ContentPersonajes = () => {
     <p className="card-text">Hair color: { item.hair_color}</p>
     <p className="card-text">Eye color: { item.eye_color}</p>
     <Link className="btn btn-primary" to={"/details-personajes/"+ (id+1) } >Learn More</Link>
+    <Link className="btn btn-light" to="/"><i className="far fa-heart"></i></Link>
   </div>
 </div>)}
         </div>

@@ -6,9 +6,9 @@ export const Navbar = () => {
 		<nav className="navbar bg-light">
 			<div className="container d-flex justify-content-between">
   <div className="col">
-    <a className="navbar-brand" href="#">
+    <Link className="navbar-brand" to="/">
 	<i className="fab fa-galactic-republic"></i>
-    </a>
+    </Link>
   </div>
   <div className="dropdown">
   <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

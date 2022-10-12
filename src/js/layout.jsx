@@ -5,7 +5,7 @@ import ScrollToTop from "./component/scrollToTop.jsx";
 import { Home } from "./views/home.jsx";
 import { DetailsPlanetas } from "./views/details-planetas.jsx";
 import { DetailsPersonajes } from "./views/details-personajes.jsx";
-import { DetailsVehiculos } from "./views/details-vehiculos.jsx";
+import { DetailsVehiculo } from "./views/details-vehiculos.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar.jsx";
@@ -29,7 +29,7 @@ const Layout = () => {
 							<DetailsPlanetas />
 						</Route>
 						<Route exact path="/details-vehiculos/:id">
-							<DetailsVehiculos />
+							<DetailsVehiculo />
 						</Route>
 						<Route exact path="/details-personajes/:id">
 							<DetailsPersonajes />

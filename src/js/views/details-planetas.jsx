@@ -1,43 +1,72 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-
+import PropTypes from "prop-types";
+import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-import "../../styles/demo.css";
-
-export const DetailsPlanetas = () => {
+export const DetailsPlanetas = props => {
 	const { store, actions } = useContext(Context);
+	const params = useParams();
+
+	let [detallesPlaneta, setDetallesPlaneta] = useState({});
+
+	const getDetallePlaneta = async () => {
+
+		try {
+			const response = await fetch("https://swapi.dev/api/planets/" + params.id)
+			const data = await response.json();
+			console.log(data);
+			// let propiedades = data.results;
+			// console.log(propiedades);
+			setDetallesPlaneta(data);
+			console.log(detallesPlaneta);
+
+
+
+		} catch (err) {
+			console.log(err);
+		}
+
+	}
+
+	useEffect(() => {
+		getDetallePlaneta()
+	}, []);
 
 	return (
-		<div className="container">
-			<ul className="list-group">
-				{store.demo.map((item, index) => {
-					return (
-						<li
-							key={index}
-							className="list-group-item d-flex justify-content-between"
-							style={{ background: item.background }}>
-							<Link to={"/single/" + index}>
-								<span>Link to: {item.title}</span>
-							</Link>
-							{// Conditional render example
-							// Check to see if the background is orange, if so, display the message
-							item.background === "orange" ? (
-								<p style={{ color: item.initial }}>
-									Check store/flux.js scroll to the actions to see the code
-								</p>
-							) : null}
-							<button className="btn btn-success" onClick={() => actions.changeColor(index, "orange")}>
-								Change Color
-							</button>
-						</li>
-					);
-				})}
-			</ul>
-			<br />
-			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
-			</Link>
+		<div className="jumbotron">
+
+			
+			{/* card */}
+			<div className="card mb-3" style={{ maxWidth: "80%", margin: "auto" }}>
+				<div className="row g-0">
+					<div className="col-md-4">
+						<img src={"https://starwars-visualguide.com/assets/img/planets/" + (params.id) + ".jpg"} className="img-fluid rounded-start" alt="..." />
+					</div>
+					<div className="col-md-8">
+						<div className="card-body">
+							<h2 className="card-title">{detallesPlaneta?.name}</h2>
+							<p className="card-text">orem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus lobortis mi ut tempor. Curabitur ultrices dapibus nisl. Sed dictum tempor ligula, eget varius enim dignissim eu. Maecenas ut sapien sagittis odio elementum eleifend convallis sollicitudin erat. Praesent finibus ligula turpis, ac placerat enim euismod ut. Maecenas laoreet dolor leo, ut ultricies ex ultricies vel.</p>
+							<p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+						</div>
+					</div>
+				</div>
+				<div className="container text-center">
+  <div className="row row-cols-6">
+    <div className="col text-danger"><h5>Name</h5><h5>{detallesPlaneta?.name}</h5></div>
+    <div className="col text-danger"><h5>Population</h5><h5>{detallesPlaneta?.population
+}</h5></div>
+    <div className="col text-danger"><h5>Rotation Period</h5><h5>{detallesPlaneta?.rotation_period}</h5></div>
+    <div className="col text-danger"><h5>Surface Water</h5><h5>{detallesPlaneta?.surface_water}</h5></div>
+	<div className="col text-danger"><h5>Gravity</h5><h5>{detallesPlaneta?.gravity
+}</h5></div>
+	<div className="col text-danger"><h5>Climate</h5><h5>{detallesPlaneta?.climate}</h5></div>
+  </div>
+</div>
+			</div>
 		</div>
 	);
+};
+
+DetailsPlanetas.propTypes = {
+	match: PropTypes.object
 };
