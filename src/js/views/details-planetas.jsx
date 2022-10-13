@@ -7,29 +7,8 @@ export const DetailsPlanetas = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 
-	let [detallesPlaneta, setDetallesPlaneta] = useState({});
-
-	const getDetallePlaneta = async () => {
-
-		try {
-			const response = await fetch("https://swapi.dev/api/planets/" + params.id)
-			const data = await response.json();
-			console.log(data);
-			// let propiedades = data.results;
-			// console.log(propiedades);
-			setDetallesPlaneta(data);
-			console.log(detallesPlaneta);
-
-
-
-		} catch (err) {
-			console.log(err);
-		}
-
-	}
-
 	useEffect(() => {
-		getDetallePlaneta()
+		actions.getDetallePlaneta(params.id)
 	}, []);
 
 	return (
@@ -44,7 +23,7 @@ export const DetailsPlanetas = props => {
 					</div>
 					<div className="col-md-8">
 						<div className="card-body">
-							<h2 className="card-title">{detallesPlaneta?.name}</h2>
+							<h2 className="card-title">{store.detallesPlaneta?.name}</h2>
 							<p className="card-text">orem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus lobortis mi ut tempor. Curabitur ultrices dapibus nisl. Sed dictum tempor ligula, eget varius enim dignissim eu. Maecenas ut sapien sagittis odio elementum eleifend convallis sollicitudin erat. Praesent finibus ligula turpis, ac placerat enim euismod ut. Maecenas laoreet dolor leo, ut ultricies ex ultricies vel.</p>
 							<p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
 						</div>
@@ -52,14 +31,14 @@ export const DetailsPlanetas = props => {
 				</div>
 				<div className="container text-center">
   <div className="row row-cols-6">
-    <div className="col text-danger"><h5>Name</h5><h5>{detallesPlaneta?.name}</h5></div>
-    <div className="col text-danger"><h5>Population</h5><h5>{detallesPlaneta?.population
+    <div className="col text-danger"><h5>Name</h5><h5>{store.detallesPlaneta?.name}</h5></div>
+    <div className="col text-danger"><h5>Population</h5><h5>{store.detallesPlaneta?.population
 }</h5></div>
-    <div className="col text-danger"><h5>Rotation Period</h5><h5>{detallesPlaneta?.rotation_period}</h5></div>
-    <div className="col text-danger"><h5>Surface Water</h5><h5>{detallesPlaneta?.surface_water}</h5></div>
-	<div className="col text-danger"><h5>Gravity</h5><h5>{detallesPlaneta?.gravity
+    <div className="col text-danger"><h5>Rotation Period</h5><h5>{store.detallesPlaneta?.rotation_period}</h5></div>
+    <div className="col text-danger"><h5>Surface Water</h5><h5>{store.detallesPlaneta?.surface_water}</h5></div>
+	<div className="col text-danger"><h5>Gravity</h5><h5>{store.detallesPlaneta?.gravity
 }</h5></div>
-	<div className="col text-danger"><h5>Climate</h5><h5>{detallesPlaneta?.climate}</h5></div>
+	<div className="col text-danger"><h5>Climate</h5><h5>{store.detallesPlaneta?.climate}</h5></div>
   </div>
 </div>
 			</div>

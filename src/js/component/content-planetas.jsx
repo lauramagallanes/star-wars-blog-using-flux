@@ -7,15 +7,13 @@ export const ContentPlanetas = () => {
 
   const {store, actions} = useContext(Context);
 
-  useEffect(() => {
-         actions.getListaPlanetas()
-     }, []);
+ 
 
     return(
         <div className="row">
           <h1>Planetas</h1>
             
-            {store.listaPlanetas.map((item, id) => <div key={item.id} className="card" style={{width: "18rem"}}>
+            {store.listaPlanetas.map((item, id) => <div key={id} className="card" style={{width: "18rem"}}>
   <img src={"https://starwars-visualguide.com/assets/img/planets/" + (id+1) + ".jpg"} className="card-img-top" alt="..."/>
   <div className="card-body">
     <h5 className="card-title">{item.name}</h5>

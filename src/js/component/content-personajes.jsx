@@ -7,9 +7,6 @@ export const ContentPersonajes = () => {
 
 const {store, actions} = useContext(Context);
 
- useEffect(() => {
-        actions.getListaPersonajes()
-    }, []);
           
 
     return(

@@ -8,7 +8,10 @@ const getState = ({
 
             listaPersonajes: [],
             listaPlanetas: [],
-            listaVehiculos: []
+            listaVehiculos: [],
+            detallesPersonaje: {},
+            detallesPlaneta: {},
+            detallesVehiculo: {}
         },
         actions: {
             // Use getActions to call a function within a fuction
@@ -62,6 +65,63 @@ const getState = ({
                 } catch (err) {
                     console.log(err);
                 }
+            },
+
+            getDetallePersonaje: async (id) => {
+
+                try {
+                    const response = await fetch("https://swapi.dev/api/people/" + id)
+                    const data = await response.json();
+                    console.log(data);
+                    // let propiedades = data.results;
+                    // console.log(propiedades);
+                    setStore({
+                        detallesPersonaje: data
+                    });
+
+
+                } catch (err) {
+                    console.log(err);
+                }
+
+            },
+
+            getDetallePlaneta: async (id) => {
+
+                try {
+                    const response = await fetch("https://swapi.dev/api/planets/" + id)
+                    const data = await response.json();
+                    console.log(data);
+                    // let propiedades = data.results;
+                    // console.log(propiedades);
+                    setStore({
+                        detallesPlaneta: data
+                    });
+
+
+                } catch (err) {
+                    console.log(err);
+                }
+
+            },
+
+            getDetalleVehiculo: async (id) => {
+
+                try {
+                    const response = await fetch("https://swapi.dev/api/vehicles/" + id)
+                    const data = await response.json();
+                    console.log(data);
+                    // let propiedades = data.results;
+                    // console.log(propiedades);
+                    setStore({
+                        detallesVehiculo: data
+                    });
+
+
+                } catch (err) {
+                    console.log(err);
+                }
+
             }
         }
     };

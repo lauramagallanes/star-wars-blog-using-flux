@@ -7,29 +7,9 @@ export const DetailsVehiculo = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 
-	let [detallesVehiculo, setdetallesVehiculo] = useState({});
-
-	const getDetalleVehiculo = async () => {
-
-		try {
-			const response = await fetch("https://swapi.dev/api/vehicles/" + params.id)
-			const data = await response.json();
-			console.log(data);
-			// let propiedades = data.results;
-			// console.log(propiedades);
-			setdetallesVehiculo(data);
-			console.log(detallesVehiculo);
-
-
-
-		} catch (err) {
-			console.log(err);
-		}
-
-	}
-
+	
 	useEffect(() => {
-		getDetalleVehiculo()
+		actions.getDetalleVehiculo(params.id)
 	}, []);
 
 	return (
@@ -44,22 +24,22 @@ export const DetailsVehiculo = props => {
 					</div>
 					<div className="col-md-8">
 						<div className="card-body">
-							<h2 className="card-title">{detallesVehiculo?.name}</h2>
-							<p className="card-text">orem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus lobortis mi ut tempor. Curabitur ultrices dapibus nisl. Sed dictum tempor ligula, eget varius enim dignissim eu. Maecenas ut sapien sagittis odio elementum eleifend convallis sollicitudin erat. Praesent finibus ligula turpis, ac placerat enim euismod ut. Maecenas laoreet dolor leo, ut ultricies ex ultricies vel.</p>
+							<h2 className="card-title">{store.detallesVehiculo?.name}</h2>
+							<p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce faucibus lobortis mi ut tempor. Curabitur ultrices dapibus nisl. Sed dictum tempor ligula, eget varius enim dignissim eu. Maecenas ut sapien sagittis odio elementum eleifend convallis sollicitudin erat. Praesent finibus ligula turpis, ac placerat enim euismod ut. Maecenas laoreet dolor leo, ut ultricies ex ultricies vel.</p>
 							<p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
 						</div>
 					</div>
 				</div>
 				<div className="container text-center">
   <div className="row row-cols-6">
-    <div className="col text-danger"><h5>Name</h5><h5>{detallesVehiculo?.name}</h5></div>
-    <div className="col text-danger"><h5>Model</h5><h5>{detallesVehiculo?.model
+    <div className="col text-danger"><h5>Name</h5><h5>{store.detallesVehiculo?.name}</h5></div>
+    <div className="col text-danger"><h5>Model</h5><h5>{store.detallesVehiculo?.model
 }</h5></div>
-    <div className="col text-danger"><h5>Manufacturer</h5><h5>{detallesVehiculo?.manufacturer}</h5></div>
-    <div className="col text-danger"><h5>Passengers</h5><h5>{detallesVehiculo?.passengers}</h5></div>
-	<div className="col text-danger"><h5>Cargo capacity</h5><h5>{detallesVehiculo?.cargo_capacity
+    <div className="col text-danger"><h5>Manufacturer</h5><h5>{store.detallesVehiculo?.manufacturer}</h5></div>
+    <div className="col text-danger"><h5>Passengers</h5><h5>{store.detallesVehiculo?.passengers}</h5></div>
+	<div className="col text-danger"><h5>Cargo capacity</h5><h5>{store.detallesVehiculo?.cargo_capacity
 }</h5></div>
-	<div className="col text-danger"><h5>Vehicle class</h5><h5>{detallesVehiculo?.vehicle_class}</h5></div>
+	<div className="col text-danger"><h5>Vehicle class</h5><h5>{store.detallesVehiculo?.vehicle_class}</h5></div>
   </div>
 </div>
 			</div>
