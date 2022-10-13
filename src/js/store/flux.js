@@ -1,45 +1,71 @@
-const getState = ({ getStore, getActions, setStore }) => {
-	return {
-		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
-		},
-		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+const getState = ({
+    getStore,
+    getActions,
+    setStore
+}) => {
+    return {
+        store: {
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+            listaPersonajes: [],
+            listaPlanetas: [],
+            listaVehiculos: []
+        },
+        actions: {
+            // Use getActions to call a function within a fuction
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
-		}
-	};
+            getListaPersonajes: async () => {
+                try {
+                    const response = await fetch("https://swapi.dev/api/people/")
+                    const data = await response.json();
+                    console.log(data);
+                    let personajes = data.results;
+                    console.log(personajes);
+                    setStore({
+                        listaPersonajes: personajes
+                    });
+                    // console.log(listaPersonajes);
+
+                } catch (err) {
+                    console.log(err);
+                }
+            },
+
+            getListaPlanetas: async () => {
+                try {
+                    const response = await fetch("https://swapi.dev/api/planets/")
+                    const data = await response.json();
+                    console.log(data);
+                    let planetas = data.results;
+                    console.log(planetas);
+                    setStore({
+                        listaPlanetas: planetas
+                    });
+                    // console.log(listaPersonajes);
+
+                } catch (err) {
+                    console.log(err);
+                }
+            },
+
+            getListaVehiculos: async () => {
+                try {
+                    const response = await fetch("https://swapi.dev/api/vehicles/")
+                    const data = await response.json();
+                    console.log(data);
+                    let vehiculos = data.results;
+                    console.log(vehiculos);
+                    setStore({
+                        listaVehiculos: vehiculos
+                    });
+                    // console.log(listaPersonajes);
+
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        }
+    };
 };
+
 
 export default getState;

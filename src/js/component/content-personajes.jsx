@@ -1,39 +1,22 @@
-import React, {Component, useState, useEffect} from "react";
+import React, {Component, useState, useEffect, useContext} from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 
 export const ContentPersonajes = () => {
 
+const {store, actions} = useContext(Context);
 
-    // const [personaje, setPersonaje] = useState("");
-    let [listaPersonajes, setListaPersonajes] = useState([]);
-
-    const getListaPersonajes = async () => {
-
-        try {
-            const response = await fetch("https://swapi.dev/api/people/")
-            const data = await response.json();
-            console.log(data);
-            let personajes = data.results;
-            console.log(personajes);
-            setListaPersonajes(personajes);
-            // console.log(listaPersonajes);
-
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    useEffect(() => {
-        getListaPersonajes()
+ useEffect(() => {
+        actions.getListaPersonajes()
     }, []);
-    console.log(listaPersonajes);
+          
 
     return(
         <div className="row">
             <h1>Personajes</h1>
             
-            {listaPersonajes.map((item, id) => <div key={id} className="card" style={{width: "18rem"}}>
+            {store.listaPersonajes.map((item, id) => <div key={id} className="card" style={{width: "18rem"}}>
   <img src={"https://starwars-visualguide.com/assets/img/characters/"+ (id+1) +".jpg"} className="card-img-top" alt="..."/>
   <div className="card-body">
     <h5 className="card-title">{item.name}</h5>
