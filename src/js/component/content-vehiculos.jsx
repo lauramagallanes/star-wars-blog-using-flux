@@ -13,7 +13,7 @@ export const ContentVehiculos = () => {
 
     return(
         <div className="row">
-            <h1>Vehiculos</h1>
+            <h1 className="text-light">Vehiculos</h1>
             
             {store.listaVehiculos.map((item, id) => <div key={id} className="card m-4 d-flex justify-content-center" style={{width: "18rem"}}>
   <img src={"https://starwars-visualguide.com/assets/img/vehicles/" + (id+1) + ".jpg"} className="card-img-top" alt="..."/>
