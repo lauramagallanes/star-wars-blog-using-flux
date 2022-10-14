@@ -17,7 +17,7 @@ const Layout = () => {
 	const basename = process.env.BASENAME || "";
 
 	return (
-		<div>
+		<div style={{backgroundImage: `url("https://images2.alphacoders.com/591/59190.jpg")`}}>
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />

@@ -7,7 +7,7 @@ export const DetailsPersonajes = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 
-	
+
 
 	useEffect(() => {
 		actions.getDetallePersonaje(params.id)
@@ -31,7 +31,7 @@ export const DetailsPersonajes = props => {
 						</div>
 					</div>
 				</div>
-				
+
 				<div className="container text-center">
 					<div className="row row-cols-6">
 						<div className="col text-danger"><h5>Name</h5><h5>{store.detallesPersonaje?.name}</h5></div>
@@ -45,6 +45,7 @@ export const DetailsPersonajes = props => {
 					</div>
 				</div>
 			</div>
+			<div><img src="https://i.pinimg.com/originals/e5/7b/9d/e57b9d4790971b74b3462a533ee7669a.jpg" alt="" /></div>
 		</div>
 	);
 };

@@ -11,10 +11,49 @@ const getState = ({
             listaVehiculos: [],
             detallesPersonaje: {},
             detallesPlaneta: {},
-            detallesVehiculo: {}
+            detallesVehiculo: {},
+
+            listaFavoritos: [],
+            classNameFavoritos: "btn btn-outline-light"
+            //    personajeFavorito: ""
         },
         actions: {
             // Use getActions to call a function within a fuction
+            cambiaClassNameFavoritos: () => {
+                let store = getStore()
+                if (store.classNameFavoritos == "btn btn-outline-light") {
+                    setStore({
+                        classNameFavoritos: "btn btn-light"
+                    })
+                } else {
+                    setStore({
+                        classNameFavoritos: "btn btn-outline-light"
+                    })
+                }
+
+            },
+            getListaFavoritos: (favorito) => {
+                let store = getStore()
+                if (store.listaFavoritos.includes(favorito)) {
+                    getActions().eliminarFavorito(favorito)
+
+                } else {
+
+                    setStore({
+                        listaFavoritos: [...store.listaFavoritos, favorito],
+
+                    }, )
+
+                }
+            },
+
+
+            eliminarFavorito: (favorito) => {
+                let store = getStore()
+                setStore({
+                    listaFavoritos: store.listaFavoritos.filter((item) => item !== favorito)
+                })
+            },
 
             getListaPersonajes: async () => {
                 try {

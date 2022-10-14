@@ -1,0 +1,17 @@
+h1 {
+    font-family: 'Monofett', cursive;
+    font-size: 6rem;
+    margin-left: 70px;
+}
+
+.card {
+    margin-left: 50px !important;
+}
+
+.jumbotron {
+    background: transparent;
+}
+
+#app {
+    background: transparent !important;
+}
