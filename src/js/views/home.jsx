@@ -16,8 +16,8 @@ export const Home = () => (
 		<div>
 			<ContentPlanetas/>
 		</div>
-		{/* <div>
+		<div>
 			<ContentVehiculos/>
-		</div> */}
+		</div>
     </div>
 );

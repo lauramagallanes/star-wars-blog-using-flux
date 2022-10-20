@@ -14,7 +14,8 @@ const getState = ({
             detallesVehiculo: {},
 
             listaFavoritos: [],
-            classNameFavoritos: "btn btn-outline-light"
+            classNameFavoritos: "btn btn-outline-light",
+            auth: false
             //    personajeFavorito: ""
         },
         actions: {
@@ -161,6 +162,48 @@ const getState = ({
                     console.log(err);
                 }
 
+            },
+
+            //aca creamos la funcion de Login
+            login: async (firstName, lastName, email, password, username) => {
+                try {
+                    const response = await fetch('https://3000-lauramagall-databasesta-lnpte522lkm.ws-us71.gitpod.io/login', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email,
+                            password: password,
+                            username: username
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+
+                    if (response.status === 200) {
+                        const data = await response.json();
+                        localStorage.setItem('token', data.access_token)
+                        console.log(data);
+                        setStore({
+                            auth: true
+                        })
+                        return true;
+
+                    }
+
+                } catch (error) {
+                    console.log(error);
+                    return false;
+                }
+            },
+
+            logout: () => {
+                localStorage.removeItem('token')
+                setStore({
+                    auth: false
+                })
+                return false;
             }
         }
     };
