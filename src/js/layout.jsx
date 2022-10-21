@@ -11,6 +11,7 @@ import { Register } from "./views/signup.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar.jsx";
+import { Footer } from "./component/footer.jsx";
 
 //create your first component
 const Layout = () => {
@@ -45,8 +46,9 @@ const Layout = () => {
 						<Route>
 							<h1>Not found!</h1>
 						</Route>
-					</Switch>
 					
+					</Switch>
+					<Footer/>
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>
