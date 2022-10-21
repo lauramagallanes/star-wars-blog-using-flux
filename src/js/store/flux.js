@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const getState = ({
     getStore,
     getActions,
@@ -15,7 +17,8 @@ const getState = ({
 
             listaFavoritos: [],
             classNameFavoritos: "btn btn-outline-light",
-            auth: false
+            auth: false,
+            registered: false
             //    personajeFavorito: ""
         },
         actions: {
@@ -165,36 +168,37 @@ const getState = ({
             },
 
             //aca creamos la funcion de Login
-            login: async (firstName, lastName, email, password, username) => {
+            login: async (email, password) => {
                 try {
-                    const response = await fetch('https://3000-lauramagall-databasesta-lnpte522lkm.ws-us71.gitpod.io/login', {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            firstName: firstName,
-                            lastName: lastName,
-                            email: email,
-                            password: password,
-                            username: username
-                        }),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
+
+                    const response = await axios.post('https://3000-lauramagall-databasesta-lnpte522lkm.ws-us72.gitpod.io/login', {
+
+                        email: email,
+                        password: password
+
                     })
 
                     if (response.status === 200) {
-                        const data = await response.json();
-                        localStorage.setItem('token', data.access_token)
-                        console.log(data);
+
+                        localStorage.setItem('token', response.data.access_token)
+
                         setStore({
                             auth: true
                         })
-                        return true;
 
                     }
+                    return true;
 
                 } catch (error) {
                     console.log(error);
-                    return false;
+                    if (error.response.status === 404) {
+                        alert(error.response.data.msg)
+                        setStore({
+                            auth: false
+                        })
+                        return false;
+                    }
+
                 }
             },
 
@@ -204,6 +208,41 @@ const getState = ({
                     auth: false
                 })
                 return false;
+            },
+            // aca creo la funcion para registrarse - Signup
+            signup: async (first_name, last_name, email, password, username) => {
+                try {
+
+                    const response = await axios.post('https://3000-lauramagall-databasesta-lnpte522lkm.ws-us72.gitpod.io/users', {
+
+                        first_name: first_name,
+                        last_name: last_name,
+                        email: email,
+                        password: password,
+                        username: username
+
+                    })
+
+                    if (response.status === 200) {
+                        getActions().login(email, password)
+                        setStore({
+                            registered: true
+                        })
+
+                    }
+                    return true;
+
+                } catch (error) {
+                    console.log(error);
+                    if (error.response.status === 400) {
+                        alert(error.response.data.msg)
+                        setStore({
+                            auth: false
+                        })
+                        return false;
+                    }
+
+                }
             }
         }
     };

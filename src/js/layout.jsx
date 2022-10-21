@@ -7,6 +7,7 @@ import { DetailsPlanetas } from "./views/details-planetas.jsx";
 import { DetailsPersonajes } from "./views/details-personajes.jsx";
 import { DetailsVehiculo } from "./views/details-vehiculos.jsx";
 import { Authentication } from "./views/login.jsx";
+import { Register } from "./views/signup.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar.jsx";
@@ -37,6 +38,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/login">
 							<Authentication />
+						</Route>
+						<Route exact path="/signup">
+							<Register />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>

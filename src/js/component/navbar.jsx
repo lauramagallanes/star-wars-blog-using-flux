@@ -35,6 +35,14 @@ export const Navbar = () => {
     
   </ul>
 </div>
+{/* aca creo un boton para login condicionado por si el usuario esta logueado-si esta logueado quiero que desaparezca */}
+<div>
+{!store.auth ? <Link to="/login" type="button" className="btn btn-lg btn-outline-light">Login</Link> : null}
+</div>
+{/* aca creo un boton para signup condicionado por si el usuario esta logueado y/o registrado-si esta logueado quiero que desaparezca */}
+<div>
+{!store.auth && !store.registered ? <Link to="/signup" type="button" className="btn btn-lg btn-outline-light">Signup</Link> : null}
+</div>
 {/* aca creo un boton para logout condicionado por si el usuario esta logueado */}
 <div>
 {store.auth ? <button type="button" className="btn btn-lg btn-outline-light" onClick={handleLogout}>Logout</button> : null}
