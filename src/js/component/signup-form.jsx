@@ -33,9 +33,10 @@ export const Signup = () => {
 
 
     return (
-        <div className="container bg-light">
+        <div className="container d-flex justify-content-center">
+        <div className="col-6 bg-light d-flex justify-content-center p-5">
             <form onSubmit={handleSubmit}>
-            <h1>Please Signup</h1>
+            <h1 style={{margin: "auto"}}>Signup</h1>
                 <div className="mb-3">
                     <label htmlFor="firstName" className="form-label">First Name</label>
                     <input type="text" className="form-control" id="firstName" aria-describedby="emailHelp" onChange={(e) => setFirstName(e.target.value)}
@@ -66,6 +67,7 @@ export const Signup = () => {
 
                 <button type="submit" className="btn btn-primary">Signup</button>
             </form>
+        </div>
         </div>
     )
 }

@@ -27,9 +27,10 @@ export const Form = () => {
 
 
   return (
-    <div className="container bg-light">
+    <div className="container d-flex justify-content-center">
+    <div className="col-6 bg-light d-flex justify-content-center p-5">
       <form onSubmit={handleSubmit}>
-        <h1>Please Login</h1>
+        <h1 style={{margin: "auto"}}>Login</h1>
 
         <div className="mb-3">
           <label htmlFor="email" className="form-label">Email address</label>
@@ -45,6 +46,7 @@ export const Form = () => {
 
         <button type="submit" className="btn btn-primary">Login</button>
       </form>
+    </div>
     </div>
   )
 }
