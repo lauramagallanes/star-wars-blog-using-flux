@@ -63,9 +63,9 @@ const getState = ({
                 try {
                     const response = await fetch("https://swapi.dev/api/people/")
                     const data = await response.json();
-                    console.log(data);
+
                     let personajes = data.results;
-                    console.log(personajes);
+
                     setStore({
                         listaPersonajes: personajes
                     });
@@ -80,9 +80,9 @@ const getState = ({
                 try {
                     const response = await fetch("https://swapi.dev/api/planets/")
                     const data = await response.json();
-                    console.log(data);
+
                     let planetas = data.results;
-                    console.log(planetas);
+
                     setStore({
                         listaPlanetas: planetas
                     });
@@ -97,9 +97,9 @@ const getState = ({
                 try {
                     const response = await fetch("https://swapi.dev/api/vehicles/")
                     const data = await response.json();
-                    console.log(data);
+
                     let vehiculos = data.results;
-                    console.log(vehiculos);
+
                     setStore({
                         listaVehiculos: vehiculos
                     });
@@ -186,12 +186,21 @@ const getState = ({
                             auth: true
                         })
 
+
+
                     }
                     return true;
 
                 } catch (error) {
                     console.log(error);
                     if (error.response.status === 404) {
+                        alert(error.response.data.msg)
+                        setStore({
+                            auth: false
+                        })
+                        return false;
+                    }
+                    if (error.response.status === 401) {
                         alert(error.response.data.msg)
                         setStore({
                             auth: false
@@ -241,6 +250,37 @@ const getState = ({
                         })
                         return false;
                     }
+
+                }
+            },
+
+            validToken: async () => {
+
+                let tokenAcceso = localStorage.getItem('token') //aca defino la variable tokenAcceso y le asigno el valor del token obtenido en el login
+                try {
+
+                    const response = await axios.get('https://3000-lauramagall-databasesta-lnpte522lkm.ws-us72.gitpod.io/valid-token', {
+
+                        headers: {
+                            Authorization: "Bearer " + tokenAcceso //aca le asigno al mensaje lo que me indica postman
+                        }
+
+                    })
+
+
+                    setStore({
+                        auth: response.data.status //aca no me va a dar un codigo de status?
+                    })
+                    return;
+
+                } catch (error) {
+                    console.log(error);
+                    if (error.code === "ERR_BAD_REQUEST") { // esto lo obtengo desde el console.log(error); me evito varios if para cada tipo de error; lo que hace es asignar el mensaje segun el tipo de error que aparezca
+                        setStore({
+                            auth: false
+                        })
+                    }
+                    return false
 
                 }
             }
